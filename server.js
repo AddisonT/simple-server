@@ -30,18 +30,34 @@ app.get('/', function(req,res) {
 });
 
 app.get('/add/:x/:y', function(req,res){
-  res.send("Sum is "+String((Number(req.params.x)+Number(req.params.y))));
+  var x = Number(req.params.x);
+  var y = Number(req.params.y);
+  var z = x+y;
+  res.send("Sum is "+z);
+ // res.send("Sum is "+String((Number(req.params.x)+Number(req.params.y))));
 });
 app.get('/subtract/:x/:y', function(req,res){
-  res.send("Subtraction is "+String((Number(req.params.x)-Number(req.params.y))));
+  var x = Number(req.params.x);
+  var y = Number(req.params.y);
+  var z = x-y;
+  res.send("Subtraction is "+z);
+  //res.send("Subtraction is "+String((Number(req.params.x)-Number(req.params.y))));
 });
 
 app.get('/multiply/:x/:y', function(req,res){
-  res.send("Multiply is "+String((Number(req.params.x)*Number(req.params.y))));
+  var x = Number(req.params.x);
+  var y = Number(req.params.y);
+  var z = x*y;
+  res.send("Multiply is "+z);
+  //res.send("Multiply is "+String((Number(req.params.x)*Number(req.params.y))));
 });
 
 app.get('/divide/:x/:y', function(req,res){
-  res.send("Division is "+String((Number(req.params.x)/Number(req.params.y))));
+  var x = Number(req.params.x);
+  var y = Number(req.params.y);
+  var z = x/y;
+  res.send("Sum is "+z);
+  //res.send("Division is "+String((Number(req.params.x)/Number(req.params.y))));
 });
 
 // Tell the server to start listening for request on
