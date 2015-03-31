@@ -1,37 +1,50 @@
 // Use require to get access to the Node
 // http library and store it in a variable.
-var http = require("http");
+var express = require('express');
 
-// Define a function doStuff that take in two
-// parameters, one for the request called req,
-// and one for the response called res.
+// Next we declare a variable that instantiates
+// the express server. Common names for this
+// variable include `app` or `server`. We're
+// going to call it `app` because that's what
+// they do in the express documentation.
 
-var doStuff = function(req, res) {
+var app = express();
 
-  // Writes the Head of the response with status
-  // code 200, specifying that the request is OK,
-  // and the body of the response will be given
-  // in plain text
+// Now that we have an app to build off of,
+// we should set up some routes.
 
-  res.writeHead(200, {"Content-Type": "text/plain"});
+// The pattern for setting up routes in express is as follows
+// 
+// app . HTTP-VERB ( '/ROUTE/PATH/DELIMITED/BY/SLASHES' , function(req,res) { // DO STUFF HERE // });
 
-  // Writes the body of the response with the content
-  // 'Hello World'
 
-  res.write("Hello World");
+// Our first route will be `GET /` which will respond
+// with "Hello World" for every request that
+// comes in to your server.
 
-  // Send the response back
+app.get('/', function(req,res) {
 
-  res.end();
-};
+  // Send back the response 'Hello World'
 
-// Creates a server with the doStuff function
-// that will respond to requests and send responses
-// as specified.
+  res.send("This is the calculator. Go to /add/num/num to add, /subtract/num/num to subtract, /multiply/num/num to multiply, and /divide/num/num to divide");
+});
 
-var server = http.createServer(doStuff);
+app.get('/add/:x/:y', function(req,res){
+  res.send("Sum is "+String((Number(req.params.x)+Number(req.params.y))));
+});
+app.get('/subtract/:x/:y', function(req,res){
+  res.send("Subtraction is "+String((Number(req.params.x)-Number(req.params.y))));
+});
+
+app.get('/multiply/:x/:y', function(req,res){
+  res.send("Multiply is "+String((Number(req.params.x)*Number(req.params.y))));
+});
+
+app.get('/divide/:x/:y', function(req,res){
+  res.send("Division is "+String((Number(req.params.x)/Number(req.params.y))));
+});
 
 // Tell the server to start listening for request on
 // port 3000
 
-server.listen(3000);
+app.listen(3000);
